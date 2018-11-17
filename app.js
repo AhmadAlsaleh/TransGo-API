@@ -5,15 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var mongoose = require('mongoose');
-var dbConnectionString = require('./models/globals').localDBconnectionString;
+var dbConnectionString = require('./models/globals').remoteDBconnectionString;
 mongoose.connect(dbConnectionString, { useNewUrlParser: true }, (err) => {
   if (err) {
-    console.log(err);
+    console.log(err.message);
   } else {
     console.log("Connected to Database");
   }
 });
-
 
 var indexRouter = require('./routes/index');
 var cityRouter = require('./routes/cities');
