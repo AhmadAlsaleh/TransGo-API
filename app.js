@@ -21,8 +21,6 @@ var trackRouter = require('./routes/tracks');
 var busRouter = require('./routes/busses');
 var userRouter = require('./routes/users');
 
-var testRouter = require('./routes/tests');
-
 var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,8 +38,6 @@ app.use('/stations', stationRouter);
 app.use('/tracks', trackRouter);
 app.use('/busses', busRouter);
 app.use('/users', userRouter);
-
-app.use('/tests', testRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
