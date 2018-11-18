@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var mongoose = require('mongoose');
-var dbConnectionString = require('./models/globals').remote;
+var dbConnectionString = require('./models/globals').local;
 mongoose.connect(dbConnectionString, { useNewUrlParser: true }, (err) => {
   if (err) {
     console.log(err.message);
@@ -18,6 +18,9 @@ var indexRouter = require('./routes/index');
 var cityRouter = require('./routes/cities');
 var stationRouter = require('./routes/stations');
 var trackRouter = require('./routes/tracks');
+var busRouter = require('./routes/busses');
+var userRouter = require('./routes/users');
+
 var testRouter = require('./routes/tests');
 
 var app = express();
@@ -35,6 +38,9 @@ app.use('/', indexRouter);
 app.use('/cities', cityRouter);
 app.use('/stations', stationRouter);
 app.use('/tracks', trackRouter);
+app.use('/busses', busRouter);
+app.use('/users', userRouter);
+
 app.use('/tests', testRouter);
 
 // catch 404 and forward to error handler

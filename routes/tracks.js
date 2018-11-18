@@ -16,14 +16,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/newTrack', (req, res, next) => {
-    Track.find((err, data) => {
-        if (err) {
-            res.status(100).json({
-                "message" : err.message
-            });
-            return;
-        }
-        new Track(req.body)
+    new Track(req.body)
         .save()
         .then(result => {
             res.send(result);
@@ -31,7 +24,6 @@ router.post('/newTrack', (req, res, next) => {
         .catch(err => {
             res.status(400).send(err);
         });
-    });
 });
 
 router.get('/:id', (req, res, next) => {
@@ -61,8 +53,37 @@ router.post('/editTrackStations/:id', (req, res, next) => {
     });
 });
 
-router.post('/editTrack', (req, res, next) => {
-    Track.updateOne( { _id : req.body.id }, req.body, (err, data) => {
+router.post('/editTrackBusses/:id', (req, res, next) => {
+    Track.updateOne( { _id : req.params.id }, { $set : { busses : req.body.busses } },
+        (err, data) => {
+        if (err) {
+            res.status(400).json({
+                "message" : err.message
+            });
+            return;
+        }
+
+        res.send(data);
+
+    });
+});
+
+router.post('/editTrack/:id', (req, res, next) => {
+    Track.updateOne( { _id : req.params.id }, req.body, (err, data) => {
+        if (err) {
+            res.status(400).json({
+                "message" : err.message
+            });
+            return;
+        }
+
+        res.send(data);
+
+    });
+});
+
+router.delete('/:id', (req, res, next) => {
+    Track.findOneAndDelete( { _id : req.params.id }, (err, data) => {
         if (err) {
             res.status(400).json({
                 "message" : err.message

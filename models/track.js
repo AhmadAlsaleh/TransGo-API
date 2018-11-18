@@ -5,7 +5,15 @@ const track = mongoose.Schema({
     code : String,
     trackLong: Number,
     cityID: String,
-    stations: [String]
+    stations: [{
+        _id: String,
+        stationOrder: Number
+    }],
+    busses: [{
+        _id : String,
+        from: String,
+        to: String
+    }]
 });
 
 module.exports = mongoose.model('Track', track);

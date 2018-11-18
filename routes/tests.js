@@ -20,4 +20,16 @@ router.get('/', (req, res, next) => {
     });
 });
 
+router.delete('/', (req, res, next) => {
+    Test.deleteMany({}, (err) => {
+        if (err) { 
+            res.send(err);
+        } else {
+            Test.find((err, data) => {
+                res.send(data);
+            });
+        }
+    });
+});
+
 module.exports = router;
