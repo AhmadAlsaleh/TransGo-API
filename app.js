@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var mongoose = require('mongoose');
-var dbConnectionString = require('./models/globals').local;
+var dbConnectionString = require('./models/globals').remote
+
 mongoose.connect(dbConnectionString, { useNewUrlParser: true }, (err) => {
   if (err) {
     console.log(err.message);
